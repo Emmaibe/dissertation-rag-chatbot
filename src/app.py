@@ -2,7 +2,7 @@
 app.py
 ------
 FastAPI REST API backend for the RAG chatbot.
-Exposes endpoints for document ingestion and querying.
+Exposes endpoints for document ingestion, querying, and the chat UI.
 
 Author: Emmanuel Ibenwankwo
 Project: An AI-Augmented DevSecOps and LLMOps Platform for a
@@ -13,14 +13,15 @@ Institution: Glasgow Caledonian University - MSc Computer Science
 import os
 import time
 import logging
+import pathlib
 from contextlib import asynccontextmanager
 from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-# Add src to path when running from project root
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -42,7 +43,6 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down RAG chatbot API...")
 
 
-# Initialise FastAPI app
 app = FastAPI(
     title="RAG Chatbot API",
     description=(
@@ -53,7 +53,6 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware (allows browser-based front end to connect)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -101,8 +100,23 @@ def root():
         "version": "0.1.0",
         "status": "running",
         "author": "Emmanuel Ibenwankwo",
-        "project": "MSc Dissertation - GCU 2025/26"
+        "project": "MSc Dissertation - GCU 2025/26",
+        "ui": "/ui"
     }
+
+
+@app.get("/ui", response_class=HTMLResponse, tags=["UI"])
+def serve_ui():
+    """
+    Serve the chat UI.
+    The HTML file is co-located in the repo root and copied into the
+    container at /app/index.html by the Dockerfile COPY src/ step.
+    Access at http://<host>:30080/ui
+    """
+    html_path = pathlib.Path(__file__).parent.parent / "index.html"
+    if not html_path.exists():
+        raise HTTPException(status_code=404, detail="UI file not found")
+    return HTMLResponse(content=html_path.read_text(encoding="utf-8"))
 
 
 @app.get("/health", tags=["Health"])

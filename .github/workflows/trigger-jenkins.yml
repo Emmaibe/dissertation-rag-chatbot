@@ -1,0 +1,32 @@
+# .github/workflows/trigger-jenkins.yml
+# Emmanuel Ibenwankwo - MSc Dissertation 2025/26
+#
+# Triggers the Jenkins pipeline on every push to main.
+# This replaces Jenkins SCM polling — GitHub pushes a webhook
+# to Jenkins immediately rather than Jenkins checking every N minutes.
+# This is the standard DevSecOps practice for event-driven CI/CD.
+
+name: Trigger Jenkins Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger:
+    name: Trigger Jenkins Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Jenkins
+        run: |
+          curl -v \
+            --user "${{ secrets.JENKINS_TOKEN }}" \
+            -X POST \
+            "${{ secrets.JENKINS_URL }}/job/rag-chatbot-pipeline/build?token=github-trigger" \
+            --max-time 30 \
+            -w "\nHTTP Status: %{http_code}\n"
+
+      - name: Confirm trigger sent
+        run: echo "Jenkins build triggered successfully for commit ${{ github.sha }}"
