@@ -25,16 +25,12 @@ pipeline {
                 echo 'Running SonarQube static analysis...'
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     sh '''
-                        docker run --rm \
-                            --network host \
-                            -e SONAR_HOST_URL="${SONAR_HOST_URL}" \
-                            -e SONAR_TOKEN="${SONAR_TOKEN}" \
-                            -v "${WORKSPACE}":/usr/src \
-                            sonarsource/sonar-scanner-cli \
-                            -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
-                            -Dsonar.projectBaseDir=/usr/src \
-                            -Dsonar.sources=/usr/src/src \
-                            -Dsonar.python.version=3.12
+                        sonar-scanner \
+                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                            -Dsonar.sources=src \
+                            -Dsonar.python.version=3.12 \
+                            -Dsonar.host.url=${SONAR_HOST_URL} \
+                            -Dsonar.token=${SONAR_TOKEN}
                     '''
                 }
             }
