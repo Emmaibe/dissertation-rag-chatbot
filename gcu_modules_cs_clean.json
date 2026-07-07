@@ -1,0 +1,398 @@
+[
+  {
+    "title": "3D Production for Virtual Reality",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI126424",
+    "code": "MMI126424",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Academic Writing for Masters",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMX230318",
+    "code": "MMX230318",
+    "level": "11",
+    "credits": "0",
+    "subject": "SCEBE Learning and Teaching",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Advanced Operating Systems",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI130764",
+    "code": "MMI130764",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Advanced Programming",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330759",
+    "code": "MMI330759",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Advanced Topics in Human Computer Interaction",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG527109",
+    "code": "MMG527109",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Applied Usability",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127112",
+    "code": "MMI127112",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Applied User Psychology",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127111",
+    "code": "MMI127111",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Artificial Intelligence and Machine Learning",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226824",
+    "code": "MMI226824",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Big Data Landscape",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226831",
+    "code": "MMI226831",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Big Data Platforms",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI227050",
+    "code": "MMI227050",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Cloud Computing and Web Services",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226816",
+    "code": "MMI226816",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Cloud Operations and Security",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330761",
+    "code": "MMI330761",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Cyber Defence and Penetration Testing",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125226",
+    "code": "MMI125226",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Cyber Forensics and Incident Response",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125225",
+    "code": "MMI125225",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Data Ethics and Research Methods",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226823",
+    "code": "MMI226823",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Data Visualisation",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226820",
+    "code": "MMI226820",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Database Systems",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI230702",
+    "code": "MMI230702",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Digital Media Commercialisation",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125049",
+    "code": "MMI125049",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Digital Media Development",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125050",
+    "code": "MMI125050",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Digital Media Publishing",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125051",
+    "code": "MMI125051",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Digital Media Technology",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125052",
+    "code": "MMI125052",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Dissertation",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG411931",
+    "code": "MMG411931",
+    "level": "11",
+    "credits": "60",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Fundamentals of Routing and Switching",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125978",
+    "code": "MMI125978",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Human Computer Interaction",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127126",
+    "code": "MMI127126",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Information Security",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI230701",
+    "code": "MMI230701",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Information Security Management",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125227",
+    "code": "MMI125227",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Masters Project",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI123177",
+    "code": "MMI123177",
+    "level": "11",
+    "credits": "60",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Motion Graphics and Visual Effects",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG525053",
+    "code": "MMG525053",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "MSc Project",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMH727233",
+    "code": "MMH727233",
+    "level": "11",
+    "credits": "60",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Network Security",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI126274",
+    "code": "MMI126274",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Programming Principles",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330703",
+    "code": "MMI330703",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Project (MSc 3D)",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMH724274",
+    "code": "MMH724274",
+    "level": "11",
+    "credits": "60",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Research and Project Methods",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI123178",
+    "code": "MMI123178",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Research Studies for Computing and Creative Technologies",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG526752",
+    "code": "MMG526752",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Secure Connectivity",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125979",
+    "code": "MMI125979",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Secure Operations",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI126277",
+    "code": "MMI126277",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computer Networks & Security",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Software Architecture",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330762",
+    "code": "MMI330762",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Software Development for Data Science",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226822",
+    "code": "MMI226822",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Software Engineering and DevOps",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330704",
+    "code": "MMI330704",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Team Project",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330760",
+    "code": "MMI330760",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "UX Design Project",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127110",
+    "code": "MMI127110",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Video Editing and Compositing",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG525055",
+    "code": "MMG525055",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Visual Design and Prototyping",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127131",
+    "code": "MMI127131",
+    "level": "11",
+    "credits": "15",
+    "subject": "Applied Computer Games",
+    "school": "School of Science & Engineering"
+  },
+  {
+    "title": "Web Application Development",
+    "url": "https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330763",
+    "code": "MMI330763",
+    "level": "11",
+    "credits": "15",
+    "subject": "Computing",
+    "school": "School of Science & Engineering"
+  }
+]

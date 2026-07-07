@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "RAG Chatbot UI",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "5500", "ui"],
+      "port": 5500
+    }
+  ]
+}

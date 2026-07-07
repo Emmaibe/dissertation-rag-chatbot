@@ -1,0 +1,44 @@
+# .dockerignore - RAG Chatbot
+# Keeps the build context small and prevents secrets/local state from
+# ever being copied into an image layer.
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Local vector store data - must NOT be baked into the image.
+# Persisted via a mounted volume instead (see Dockerfile notes).
+chroma_db/
+
+# Secrets - never bake API keys into an image layer
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
+.gitignore
+
+# Tests / dev tooling (not needed at runtime; CI runs these separately)
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Docs
+README.md
+*.md
+
+# Docker itself
+Dockerfile
+.dockerignore
+docker-compose.yml

@@ -1,0 +1,36 @@
+# docker-compose.yml - RAG Chatbot (local development / testing)
+# Emmanuel Ibenwankwo - MSc Dissertation 2025/26
+#
+# Usage:
+#   docker compose up --build
+#   curl http://localhost:8000/health
+#
+# This mirrors, at small scale, the production Production Server deployment:
+# the container is stateless, and chroma_db/ is a named volume rather than
+# baked into the image — the same separation the K3s PersistentVolumeClaim
+# will provide later.
+
+services:
+  rag-chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rag-chatbot:local
+    container_name: rag-chatbot
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - chroma_data:/data/chroma_db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://localhost:8000/health', timeout=3).status==200 else sys.exit(1)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+    driver: local

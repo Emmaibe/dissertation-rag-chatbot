@@ -1,0 +1,28 @@
+# RAG Chatbot - Python Dependencies
+# Emmanuel Ibenwankwo - MSc Dissertation 2025/26
+
+# Core RAG stack
+langchain==0.3.25
+langchain-community==0.3.23
+langchain-groq==0.3.2
+
+# LLM provider
+groq==0.28.0
+
+# Embeddings (CPU-only; torch is pre-installed as CPU wheel in Dockerfile
+# before this file is processed, so pip reuses it rather than pulling CUDA)
+sentence-transformers==4.1.0
+
+# Vector store
+chromadb==1.0.9
+
+# API framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+
+# Environment management
+python-dotenv==1.1.0
+
+# Testing
+pytest==8.3.5
+pytest-cov==6.1.0
