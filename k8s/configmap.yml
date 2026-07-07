@@ -1,0 +1,15 @@
+# Non-secret environment variables consumed by RAGPipeline.__init__()
+# These map directly to os.getenv() calls in rag_pipeline.py
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-chatbot-config
+  namespace: rag-chatbot
+data:
+  CHROMA_DB_PATH: "/data/chroma_db"
+  DATA_DIR: "/app/data"
+  EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+  GROQ_MODEL: "llama-3.3-70b-versatile"
+  CHUNK_SIZE: "500"
+  CHUNK_OVERLAP: "50"
+  TOP_K_RESULTS: "4"

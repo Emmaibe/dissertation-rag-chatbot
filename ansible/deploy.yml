@@ -1,0 +1,66 @@
+---
+# ansible/deploy.yml
+# Emmanuel Ibenwankwo - MSc Dissertation 2025/26
+# Deploys the RAG chatbot to K3s on the Production Server.
+# Called by Jenkins Stage 7 after image is pushed to Docker Hub.
+
+- name: Deploy RAG Chatbot to K3s
+  hosts: localhost
+  connection: local
+  become: yes
+
+  vars:
+    image_tag: "{{ image_tag }}"
+    docker_hub_user: "{{ docker_hub_user }}"
+    namespace: rag-chatbot
+    manifest_dir: /home/ubuntu/k8s
+
+  tasks:
+
+    - name: Create rag-chatbot namespace
+      command: kubectl apply -f {{ manifest_dir }}/namespace.yml
+      changed_when: true
+
+    - name: Apply PersistentVolumeClaim for ChromaDB
+      command: kubectl apply -f {{ manifest_dir }}/pvc.yml
+      changed_when: true
+
+    - name: Apply ConfigMap (non-secret environment variables)
+      command: kubectl apply -f {{ manifest_dir }}/configmap.yml
+      changed_when: true
+
+    - name: Apply Secret (GROQ_API_KEY)
+      command: kubectl apply -f {{ manifest_dir }}/secret.yml
+      changed_when: true
+
+    - name: Update image tag in deployment
+      command: >
+        kubectl set image deployment/rag-chatbot
+        rag-chatbot={{ docker_hub_user }}/rag-chatbot:{{ image_tag }}
+        -n {{ namespace }}
+      changed_when: true
+      ignore_errors: yes
+
+    - name: Apply full deployment manifest
+      command: kubectl apply -f {{ manifest_dir }}/deployment.yml
+      changed_when: true
+
+    - name: Apply Service manifest
+      command: kubectl apply -f {{ manifest_dir }}/service.yml
+      changed_when: true
+
+    - name: Wait for rolling update to complete
+      command: >
+        kubectl rollout status deployment/rag-chatbot
+        -n {{ namespace }}
+        --timeout=120s
+      changed_when: false
+
+    - name: Show running pods
+      command: kubectl get pods -n {{ namespace }}
+      changed_when: false
+      register: pods_output
+
+    - name: Print pod status
+      debug:
+        msg: "{{ pods_output.stdout }}"

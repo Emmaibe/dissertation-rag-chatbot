@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-chatbot
+  namespace: rag-chatbot
+  labels:
+    app: rag-chatbot
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rag-chatbot
+  # Rolling update: never takes all 3 replicas down at once.
+  # Demonstrates LLMOps zero-downtime deployment in the dissertation evaluation.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: rag-chatbot
+    spec:
+      containers:
+        - name: rag-chatbot
+          image: lordibe/rag-chatbot:latest
+          ports:
+            - containerPort: 8000
+          # ConfigMap supplies DATA_DIR, CHROMA_DB_PATH, model names etc.
+          envFrom:
+            - configMapRef:
+                name: rag-chatbot-config
+            - secretRef:
+                name: rag-chatbot-secret
+          volumeMounts:
+            - name: chroma-storage
+              mountPath: /data/chroma_db
+          # Liveness probe maps to app.py GET /health
+          # Returns {"status": "healthy"} when pipeline.get_stats()["status"] == "ready"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 40
+            periodSeconds: 15
+            failureThreshold: 3
+          # Readiness probe: K3s only sends traffic once /health returns 200
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: chroma-storage
+          persistentVolumeClaim:
+            claimName: chroma-pvc

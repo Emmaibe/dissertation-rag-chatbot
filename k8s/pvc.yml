@@ -1,0 +1,15 @@
+# ChromaDB persistent storage
+# ReadWriteOnce: one node at a time (correct for a single-node K3s cluster)
+# local-path: K3s default storage class — no additional provisioner needed
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chroma-pvc
+  namespace: rag-chatbot
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-path

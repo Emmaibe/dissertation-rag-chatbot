@@ -1,0 +1,36 @@
+# Secrets — never commit
+.env
+
+# Local vector store — binary, machine-specific, rebuilt on deploy
+chroma_db/
+
+# Kubernetes secret — contains real API key, applied manually
+k8s/secret.yml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Test artifacts
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+.claude/
+
+# OS
+.DS_Store
+
+# Accidental files
+files.zip
+'{data,src,tests}'
+
+# Docker local dev only
+docker-compose.yml
