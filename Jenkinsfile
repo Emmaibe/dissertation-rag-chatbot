@@ -33,7 +33,6 @@ pipeline {
                             sonarsource/sonar-scanner-cli \
                             -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
                             -Dsonar.sources=src \
-                            -Dsonar.tests=tests \
                             -Dsonar.python.version=3.12
                     '''
                 }
