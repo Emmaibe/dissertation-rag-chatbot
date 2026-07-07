@@ -13,7 +13,6 @@ pipeline {
 
     stages {
 
-        // ── Stage 1: Checkout ──────────────────────────────────────────────
         stage('Checkout') {
             steps {
                 echo 'Checking out source code from GitHub...'
@@ -21,35 +20,26 @@ pipeline {
             }
         }
 
-        // ── Stage 2: Static Analysis (SonarQube) ──────────────────────────
-        // Analyses src/ for bugs, code smells, and security vulnerabilities.
-        // Acts as a quality gate before any build artifact is produced.
         stage('Static Analysis') {
             steps {
                 echo 'Running SonarQube static analysis...'
-                withCredentials([string(credentialsId: 'sonarqube-token',
-                                        variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     sh '''
                         docker run --rm \
                             --network host \
-                            -e SONAR_HOST_URL=${SONAR_HOST_URL} \
-                            -e SONAR_SCANNER_OPTS="\
-                                -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                                -Dsonar.sources=src \
-                                -Dsonar.tests=tests \
-                                -Dsonar.python.version=3.12 \
-                                -Dsonar.token=${SONAR_TOKEN}" \
-                            -v ${WORKSPACE}:/usr/src \
-                            sonarsource/sonar-scanner-cli
+                            -e SONAR_HOST_URL="${SONAR_HOST_URL}" \
+                            -e SONAR_TOKEN="${SONAR_TOKEN}" \
+                            -v "${WORKSPACE}":/usr/src \
+                            sonarsource/sonar-scanner-cli \
+                            -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
+                            -Dsonar.sources=src \
+                            -Dsonar.tests=tests \
+                            -Dsonar.python.version=3.12
                     '''
                 }
             }
         }
 
-        // ── Stage 3: Docker Build ──────────────────────────────────────────
-        // Multi-stage Dockerfile: build-time deps stripped from final image.
-        // CPU-only torch pre-installed before requirements.txt to avoid
-        // the 1.5 GB CUDA download that sentence-transformers triggers.
         stage('Docker Build') {
             steps {
                 echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
@@ -62,11 +52,6 @@ pipeline {
             }
         }
 
-        // ── Stage 4: Security Scan (Trivy) ────────────────────────────────
-        // Scans the built image for HIGH and CRITICAL CVEs.
-        // Pipeline fails here if vulnerabilities are found — this is the
-        // key security gate that the dissertation's "with/without security"
-        // comparison demonstrates.
         stage('Security Scan') {
             steps {
                 echo 'Scanning Docker image with Trivy...'
@@ -81,11 +66,6 @@ pipeline {
             }
         }
 
-        // ── Stage 5: Unit Tests ───────────────────────────────────────────
-        // Runs 13 pytest tests inside the built container.
-        // Tests use temp dirs for ChromaDB — no GROQ_API_KEY needed
-        // because the LLM is never called in the test suite (RAGResponse
-        // is constructed directly, not via pipeline.query()).
         stage('Unit Tests') {
             steps {
                 echo 'Running pytest unit tests inside Docker container...'
@@ -102,7 +82,6 @@ pipeline {
             }
         }
 
-        // ── Stage 6: Push Image to Docker Hub ─────────────────────────────
         stage('Push Image') {
             steps {
                 echo "Pushing ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub..."
@@ -121,9 +100,6 @@ pipeline {
             }
         }
 
-        // ── Stage 7: Deploy to K3s via Ansible ───────────────────────────
-        // Copies manifests to the Production Server then runs the Ansible
-        // playbook which applies them to K3s with the new image tag.
         stage('Deploy') {
             steps {
                 echo 'Deploying to Production Server via Ansible...'
@@ -132,7 +108,6 @@ pipeline {
                     keyFileVariable: 'SSH_KEY'
                 )]) {
                     sh '''
-                        # Copy Ansible playbook and K3s manifests to prod server
                         scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             ansible/deploy.yml \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
@@ -141,7 +116,6 @@ pipeline {
                             k8s/ \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
 
-                        # Run Ansible playbook on prod server
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP} \
                             "ansible-playbook /home/ubuntu/deploy.yml \
@@ -152,9 +126,6 @@ pipeline {
             }
         }
 
-        // ── Stage 8: Verify Deployment ────────────────────────────────────
-        // Confirms all 3 replicas are Running and /health returns "healthy".
-        // This matches the actual health_check() return value in app.py.
         stage('Verify Deployment') {
             steps {
                 echo 'Verifying deployment on Production Server...'
