@@ -72,9 +72,9 @@ pipeline {
                         -e GROQ_API_KEY=test_key_not_used_in_tests \
                         --user app \
                         --workdir /app/src \
-                        --entrypoint python \
+                        --entrypoint /home/app/.local/bin/pytest \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
-                        -m pytest ../tests/ -v --tb=short
+                        ../tests/ -v --tb=short
                 '''
             }
         }
