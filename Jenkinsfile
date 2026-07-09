@@ -24,10 +24,8 @@ pipeline {
             steps {
                 echo 'Running pytest with coverage...'
                 sh '''
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install --quiet --upgrade pip
-                    pip install --quiet -r requirements.txt
+                    pip install --quiet --break-system-packages \
+                        pytest pytest-cov -r requirements.txt
                     pytest tests/ \
                         -v \
                         --tb=short \
@@ -163,7 +161,7 @@ pipeline {
         always {
             sh "docker image rm ${IMAGE_NAME}:${IMAGE_TAG} || true"
             sh "docker image rm ${IMAGE_NAME}:latest || true"
-            sh "rm -rf venv coverage.xml || true"
+            sh "rm -f coverage.xml || true"
         }
     }
 }
