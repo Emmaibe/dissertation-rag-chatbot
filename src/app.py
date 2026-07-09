@@ -3,6 +3,8 @@ app.py
 ------
 FastAPI REST API backend for the RAG chatbot.
 Exposes endpoints for document ingestion, querying, and the chat UI.
+Includes session-based conversation memory so the LLM can reference
+previous turns in the same chat session.
 
 Author: Emmanuel Ibenwankwo
 Project: An AI-Augmented DevSecOps and LLMOps Platform for a
@@ -12,10 +14,12 @@ Institution: Glasgow Caledonian University - MSc Computer Science
 
 import os
 import time
+import uuid
 import logging
 import pathlib
 from contextlib import asynccontextmanager
-from typing import List, Optional
+from typing import List, Optional, Dict
+from collections import defaultdict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,6 +35,27 @@ logger = logging.getLogger(__name__)
 
 # Global pipeline instance
 pipeline: Optional[RAGPipeline] = None
+
+# In-memory conversation history store
+# Key: session_id (str), Value: list of {"role": "user"|"assistant", "content": str}
+# Limited to last 10 turns per session to avoid prompt bloat
+conversation_store: Dict[str, List[dict]] = defaultdict(list)
+MAX_HISTORY_TURNS = 10
+
+# Greeting handler — responds without hitting the RAG pipeline
+GREETINGS = {
+    "hi", "hello", "hey", "hiya", "howdy",
+    "how are you", "what can you do", "help", "what do you do",
+    "who are you", "what are you"
+}
+
+GREETING_RESPONSE = (
+    "Hello! I'm the GCU DevSecOps Knowledge Assistant. "
+    "I can answer questions about MSc Computer Science modules at "
+    "Glasgow Caledonian University — including module descriptions, "
+    "credit values, SCQF levels, subject areas, and assessment methods. "
+    "Try asking me about a specific module!"
+)
 
 
 @asynccontextmanager
@@ -65,10 +90,14 @@ app.add_middleware(
 
 class QueryRequest(BaseModel):
     question: str
+    session_id: Optional[str] = None  # If None, a new session is created
 
     class Config:
         json_schema_extra = {
-            "example": {"question": "What is DevSecOps?"}
+            "example": {
+                "question": "How many credits is the Masters Project?",
+                "session_id": "optional-existing-session-id"
+            }
         }
 
 
@@ -80,6 +109,7 @@ class SourceDocument(BaseModel):
 class QueryResponse(BaseModel):
     question: str
     answer: str
+    session_id: str
     source_documents: List[SourceDocument]
     metrics: dict
 
@@ -90,11 +120,33 @@ class IngestResponse(BaseModel):
     message: str
 
 
+# ── Helpers ────────────────────────────────────────────────────────────────────
+
+def build_history_context(session_id: str) -> str:
+    """Build a formatted string of recent conversation history."""
+    history = conversation_store[session_id]
+    if not history:
+        return ""
+    lines = ["Previous conversation:"]
+    for turn in history[-MAX_HISTORY_TURNS:]:
+        role = "User" if turn["role"] == "user" else "Assistant"
+        lines.append(f"{role}: {turn['content']}")
+    return "\n".join(lines)
+
+
+def store_turn(session_id: str, question: str, answer: str):
+    """Append a user/assistant turn to the session history."""
+    conversation_store[session_id].append({"role": "user", "content": question})
+    conversation_store[session_id].append({"role": "assistant", "content": answer})
+    # Trim to last MAX_HISTORY_TURNS * 2 messages
+    if len(conversation_store[session_id]) > MAX_HISTORY_TURNS * 2:
+        conversation_store[session_id] = conversation_store[session_id][-(MAX_HISTORY_TURNS * 2):]
+
+
 # ── Endpoints ──────────────────────────────────────────────────────────────────
 
 @app.get("/", tags=["Health"])
 def root():
-    """Root endpoint — confirms API is running."""
     return {
         "service": "RAG Chatbot API",
         "version": "0.1.0",
@@ -107,12 +159,7 @@ def root():
 
 @app.get("/ui", response_class=HTMLResponse, tags=["UI"])
 def serve_ui():
-    """
-    Serve the chat UI.
-    The HTML file is co-located in the repo root and copied into the
-    container at /app/index.html by the Dockerfile COPY src/ step.
-    Access at http://<host>:30080/ui
-    """
+    """Serve the chat UI at GET /ui."""
     html_path = pathlib.Path(__file__).parent.parent / "index.html"
     if not html_path.exists():
         raise HTTPException(status_code=404, detail="UI file not found")
@@ -121,7 +168,7 @@ def serve_ui():
 
 @app.get("/health", tags=["Health"])
 def health_check():
-    """Health check endpoint for Kubernetes liveness/readiness probes."""
+    """Health check for Kubernetes liveness/readiness probes."""
     stats = pipeline.get_stats() if pipeline else {"status": "not_initialised"}
     return {
         "status": "healthy" if stats.get("status") == "ready" else "degraded",
@@ -132,10 +179,7 @@ def health_check():
 
 @app.post("/ingest", response_model=IngestResponse, tags=["Ingestion"])
 def ingest_documents():
-    """
-    Ingest documents from the data directory into the vector store.
-    Call this once on first setup, or whenever the corpus changes.
-    """
+    """Ingest documents from the data directory into the vector store."""
     if pipeline is None:
         raise HTTPException(status_code=503, detail="Pipeline not initialised")
     try:
@@ -150,33 +194,48 @@ def ingest_documents():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-GREETINGS = {"hi", "hello", "hey", "how are you", "what can you do", "help"}
-
 @app.post("/query", response_model=QueryResponse, tags=["Query"])
 def query(request: QueryRequest):
     """
-    Query the RAG chatbot with a natural language question.
-    Returns the answer, source documents, and latency metrics.
+    Query the RAG chatbot. Maintains conversation history per session_id.
+    Pass the returned session_id back on subsequent requests to continue
+    the conversation with memory of previous turns.
     """
-
     if pipeline is None:
         raise HTTPException(status_code=503, detail="Pipeline not initialised")
 
-    if not request.question.strip():
+    question = request.question.strip()
+    if not question:
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
-    q = request.question.strip().lower().rstrip("?!.")
-    if q in GREETINGS:
+    # Create or reuse session
+    session_id = request.session_id or str(uuid.uuid4())
+
+    # Greeting shortcut — no RAG needed
+    if question.lower().rstrip("?!.") in GREETINGS:
+        store_turn(session_id, question, GREETING_RESPONSE)
         return QueryResponse(
-            question=request.question,
-            answer="Hello! I'm the GCU DevSecOps Knowledge Assistant. I can answer questions about MSc Computer Science modules at Glasgow Caledonian University. Try asking me about a specific module, assessment methods, or credit values.",
+            question=question,
+            answer=GREETING_RESPONSE,
+            session_id=session_id,
             source_documents=[],
-            metrics={"retrieval_latency_ms": 0, "generation_latency_ms": 0, "total_latency_ms": 0,
-                     "num_chunks_retrieved": 0}
+            metrics={
+                "retrieval_latency_ms": 0,
+                "generation_latency_ms": 0,
+                "total_latency_ms": 0,
+                "num_chunks_retrieved": 0,
+            }
         )
 
     try:
-        result: RAGResponse = pipeline.query(request.question)
+        # Prepend conversation history to the question for context-aware retrieval
+        history_context = build_history_context(session_id)
+        augmented_question = (
+            f"{history_context}\n\nCurrent question: {question}"
+            if history_context else question
+        )
+
+        result: RAGResponse = pipeline.query(augmented_question)
 
         source_docs = [
             SourceDocument(
@@ -186,9 +245,13 @@ def query(request: QueryRequest):
             for doc in result.source_documents
         ]
 
+        # Store this turn in session history
+        store_turn(session_id, question, result.answer)
+
         return QueryResponse(
-            question=result.query,
+            question=question,
             answer=result.answer,
+            session_id=session_id,
             source_documents=source_docs,
             metrics={
                 "retrieval_latency_ms": round(result.retrieval_latency_ms, 2),
@@ -202,6 +265,14 @@ def query(request: QueryRequest):
     except Exception as e:
         logger.error(f"Query failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/session/{session_id}", tags=["Session"])
+def clear_session(session_id: str):
+    """Clear conversation history for a session."""
+    if session_id in conversation_store:
+        del conversation_store[session_id]
+    return {"status": "cleared", "session_id": session_id}
 
 
 @app.get("/stats", tags=["Health"])
