@@ -160,7 +160,7 @@ pipeline {
 
         // ── Stage 8: Verify Deployment ────────────────────────────────────
         // Confirms all 3 replicas are Running and /health returns "healthy".
-        stage('Verify Deployment') {
+       stage('Verify Deployment') {
             steps {
                 echo 'Verifying deployment on Production Server...'
                 withCredentials([sshUserPrivateKey(
@@ -168,16 +168,32 @@ pipeline {
                     keyFileVariable: 'SSH_KEY'
                 )]) {
                     sh '''
-                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                            ${PROD_SERVER_USER}@${PROD_SERVER_IP} << 'REMOTE'
+        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+            ${PROD_SERVER_USER}@${PROD_SERVER_IP} <<'REMOTE'
+        set -e
+
         sudo kubectl get pods -n rag-chatbot
-        sudo kubectl rollout status deployment/rag-chatbot -n rag-chatbot --timeout=120s
-        sleep 60
+
+        sudo kubectl rollout status deployment/rag-chatbot \
+            -n rag-chatbot \
+            --timeout=120s
+
+        echo "Waiting for API..."
+        until curl -sf http://localhost:30080/health >/dev/null; do
+            sleep 5
+        done
+
+        echo "Running document ingestion..."
         curl -sf -X POST http://localhost:30080/ingest
+
+        echo "Waiting for ingestion..."
         sleep 30
+
+        echo "Checking health..."
         curl -sf http://localhost:30080/health
+
         REMOTE
-                    '''
+        '''
                 }
             }
         }
