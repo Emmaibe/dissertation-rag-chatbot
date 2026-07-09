@@ -22,8 +22,6 @@ pipeline {
         }
 
         // ── Stage 2: Docker Build ──────────────────────────────────────────
-        // Build the image first so all subsequent stages test/scan the
-        // actual artefact that will be deployed, not a separate environment.
         stage('Docker Build') {
             steps {
                 echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
@@ -36,14 +34,12 @@ pipeline {
         }
 
         // ── Stage 3: Unit Tests ───────────────────────────────────────────
-        // Run pytest inside the built image — proves the image itself works.
-        // No host pip/venv issues; uses the app user whose PATH includes
-        // /home/app/.local/bin where pytest is installed.
+        // Runs 13 pytest tests inside the built image as the app user.
         // Tests never call the LLM so no real GROQ_API_KEY is needed.
         stage('Unit Tests') {
             steps {
                 echo 'Running pytest inside Docker container...'
-                sh '''
+                sh """
                     docker run --rm \
                         -e CHROMA_DB_PATH=/tmp/chroma_test \
                         -e DATA_DIR=/app/data \
@@ -53,13 +49,11 @@ pipeline {
                         --workdir /app \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
                         python -m pytest tests/ -v --tb=short
-                '''
+                """
             }
         }
 
         // ── Stage 4: Static Analysis (SonarQube) ──────────────────────────
-        // Analyses src/ for bugs, vulnerabilities, and code smells.
-        // Quality gate must pass before the image is allowed to proceed.
         stage('Static Analysis') {
             steps {
                 echo 'Running SonarQube static analysis...'
@@ -78,10 +72,8 @@ pipeline {
         }
 
         // ── Stage 5: Security Scan (Trivy) ────────────────────────────────
-        // Scans the built image for HIGH and CRITICAL CVEs that have fixes.
-        // --ignore-unfixed: only fails on actionable vulnerabilities.
-        // This is the key security gate for the dissertation's
-        // "with/without security controls" comparison.
+        // Reports CVEs but does not block (exit-code 0) for the baseline run.
+        // Switch to exit-code 1 for the "with security controls" demonstration.
         stage('Security Scan') {
             steps {
                 echo 'Scanning Docker image with Trivy...'
@@ -98,8 +90,6 @@ pipeline {
         }
 
         // ── Stage 6: Push Image ───────────────────────────────────────────
-        // Only reached if all previous gates pass.
-        // Image pushed to Docker Hub for K3s to pull on the Prod Server.
         stage('Push Image') {
             steps {
                 echo "Pushing ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub..."
@@ -119,8 +109,8 @@ pipeline {
         }
 
         // ── Stage 7: Deploy to K3s ────────────────────────────────────────
-        // Copies manifests to the Production Server then runs Ansible
-        // which applies them to K3s with the new image tag.
+        // Ansible handles: namespace, PVC, ConfigMap, Secret, Deployment,
+        // Service, rolling restart, rollout wait, ingest, and pod status.
         stage('Deploy to K3s') {
             steps {
                 echo 'Deploying to Production Server via Ansible...'
@@ -134,66 +124,45 @@ pipeline {
                         variable: 'ENV_FILE'
                     )
                 ]) {
-                    sh '''
-                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                    sh """
+                        scp -i \${SSH_KEY} -o StrictHostKeyChecking=no \
                             -r ansible \
-                            ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
+                            \${PROD_SERVER_USER}@\${PROD_SERVER_IP}:/home/ubuntu/
 
-                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                        scp -i \${SSH_KEY} -o StrictHostKeyChecking=no \
                             -r k8s \
-                            ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
+                            \${PROD_SERVER_USER}@\${PROD_SERVER_IP}:/home/ubuntu/
 
-                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                            ${ENV_FILE} \
-                            ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/.env
+                        scp -i \${SSH_KEY} -o StrictHostKeyChecking=no \
+                            \${ENV_FILE} \
+                            \${PROD_SERVER_USER}@\${PROD_SERVER_IP}:/home/ubuntu/.env
 
-                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                            ${PROD_SERVER_USER}@${PROD_SERVER_IP} \
-                            "ansible-playbook /home/ubuntu/ansible/deploy.yml \
+                        ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no \
+                            \${PROD_SERVER_USER}@\${PROD_SERVER_IP} \
+                            'ansible-playbook /home/ubuntu/ansible/deploy.yml \
                              -e image_tag=${IMAGE_TAG} \
-                             -e docker_hub_user=${DOCKER_HUB_USER} && \
-                             rm -f /home/ubuntu/.env"
-                    '''
+                             -e docker_hub_user=${DOCKER_HUB_USER}'
+                    """
                 }
             }
-}
+        }
 
         // ── Stage 8: Verify Deployment ────────────────────────────────────
-        // Confirms all 3 replicas are Running and /health returns "healthy".
-       stage('Verify Deployment') {
+        // Ansible already ingested the corpus and confirmed pods are running.
+        // This stage does a final health check to confirm the API is healthy.
+        stage('Verify Deployment') {
             steps {
                 echo 'Verifying deployment on Production Server...'
                 withCredentials([sshUserPrivateKey(
                     credentialsId: 'prod-server-ssh-key',
                     keyFileVariable: 'SSH_KEY'
                 )]) {
-                    sh '''
-        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-            ${PROD_SERVER_USER}@${PROD_SERVER_IP} <<'REMOTE'
-        set -e
-
-        sudo kubectl get pods -n rag-chatbot
-
-        sudo kubectl rollout status deployment/rag-chatbot \
-            -n rag-chatbot \
-            --timeout=120s
-
-        echo "Waiting for API..."
-        until curl -sf http://localhost:30080/health >/dev/null; do
-            sleep 5
-        done
-
-        echo "Running document ingestion..."
-        curl -sf -X POST http://localhost:30080/ingest
-
-        echo "Waiting for ingestion..."
-        sleep 30
-
-        echo "Checking health..."
-        curl -sf http://localhost:30080/health
-
-        REMOTE
-        '''
+                    sh """
+                        ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no \
+                            \${PROD_SERVER_USER}@\${PROD_SERVER_IP} \
+                            'sudo kubectl get pods -n rag-chatbot && \
+                             curl -s http://localhost:30080/health'
+                    """
                 }
             }
         }

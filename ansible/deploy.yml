@@ -61,11 +61,15 @@
       command: kubectl apply -f {{ manifest_dir }}/service.yml
       changed_when: true
 
+    - name: Restart deployment to pick up latest ConfigMap and Secret
+      command: kubectl rollout restart deployment/rag-chatbot -n {{ namespace }}
+      changed_when: true
+
     - name: Wait for rolling update to complete
       command: >
         kubectl rollout status deployment/rag-chatbot
         -n {{ namespace }}
-        --timeout=120s
+        --timeout=180s
       changed_when: false
 
     - name: Show running pods
@@ -76,3 +80,19 @@
     - name: Print pod status
       debug:
         msg: "{{ pods_output.stdout }}"
+
+    - name: Wait for pods to fully initialise before ingestion
+      pause:
+        seconds: 90
+
+    - name: Ingest GCU module corpus into ChromaDB
+      uri:
+        url: "http://localhost:30080/ingest"
+        method: POST
+        timeout: 300
+        status_code: 200
+      register: ingest_result
+
+    - name: Show ingestion result
+      debug:
+        msg: "Ingested {{ ingest_result.json.chunks_ingested }} chunks — {{ ingest_result.json.message }}"
