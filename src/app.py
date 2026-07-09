@@ -2,9 +2,8 @@
 app.py
 ------
 FastAPI REST API backend for the RAG chatbot.
-Exposes endpoints for document ingestion, querying, and the chat UI.
-Includes session-based conversation memory so the LLM can reference
-previous turns in the same chat session.
+Exposes endpoints for document ingestion, querying, the chat UI,
+Prometheus metrics, and session-based conversation memory.
 
 Author: Emmanuel Ibenwankwo
 Project: An AI-Augmented DevSecOps and LLMOps Platform for a
@@ -25,6 +24,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
+from prometheus_fastapi_instrumentator import Instrumentator
 
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
@@ -37,16 +37,15 @@ logger = logging.getLogger(__name__)
 pipeline: Optional[RAGPipeline] = None
 
 # In-memory conversation history store
-# Key: session_id (str), Value: list of {"role": "user"|"assistant", "content": str}
-# Limited to last 10 turns per session to avoid prompt bloat
+# Key: session_id, Value: list of {"role": "user"|"assistant", "content": str}
 conversation_store: Dict[str, List[dict]] = defaultdict(list)
 MAX_HISTORY_TURNS = 10
 
-# Greeting handler — responds without hitting the RAG pipeline
+# Greeting shortcut — bypasses RAG pipeline for informal openers
 GREETINGS = {
     "hi", "hello", "hey", "hiya", "howdy",
-    "how are you", "what can you do", "help", "what do you do",
-    "who are you", "what are you"
+    "how are you", "what can you do", "help",
+    "what do you do", "who are you", "what are you"
 }
 
 GREETING_RESPONSE = (
@@ -78,6 +77,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -85,12 +85,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Prometheus instrumentation
+# Automatically exposes GET /metrics with:
+#   http_requests_total — request count by method, handler, status
+#   http_request_duration_seconds — latency histogram per endpoint
+#   http_requests_in_progress — concurrent requests gauge
+Instrumentator().instrument(app).expose(app)
+
 
 # ── Request / Response Models ──────────────────────────────────────────────────
 
 class QueryRequest(BaseModel):
     question: str
-    session_id: Optional[str] = None  # If None, a new session is created
+    session_id: Optional[str] = None
 
     class Config:
         json_schema_extra = {
@@ -138,7 +145,6 @@ def store_turn(session_id: str, question: str, answer: str):
     """Append a user/assistant turn to the session history."""
     conversation_store[session_id].append({"role": "user", "content": question})
     conversation_store[session_id].append({"role": "assistant", "content": answer})
-    # Trim to last MAX_HISTORY_TURNS * 2 messages
     if len(conversation_store[session_id]) > MAX_HISTORY_TURNS * 2:
         conversation_store[session_id] = conversation_store[session_id][-(MAX_HISTORY_TURNS * 2):]
 
@@ -147,13 +153,15 @@ def store_turn(session_id: str, question: str, answer: str):
 
 @app.get("/", tags=["Health"])
 def root():
+    """Root endpoint — confirms API is running."""
     return {
         "service": "RAG Chatbot API",
         "version": "0.1.0",
         "status": "running",
         "author": "Emmanuel Ibenwankwo",
         "project": "MSc Dissertation - GCU 2025/26",
-        "ui": "/ui"
+        "ui": "/ui",
+        "metrics": "/metrics"
     }
 
 
@@ -197,9 +205,8 @@ def ingest_documents():
 @app.post("/query", response_model=QueryResponse, tags=["Query"])
 def query(request: QueryRequest):
     """
-    Query the RAG chatbot. Maintains conversation history per session_id.
-    Pass the returned session_id back on subsequent requests to continue
-    the conversation with memory of previous turns.
+    Query the RAG chatbot with a natural language question.
+    Pass session_id from a previous response to maintain conversation memory.
     """
     if pipeline is None:
         raise HTTPException(status_code=503, detail="Pipeline not initialised")
@@ -208,7 +215,6 @@ def query(request: QueryRequest):
     if not question:
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
-    # Create or reuse session
     session_id = request.session_id or str(uuid.uuid4())
 
     # Greeting shortcut — no RAG needed
@@ -228,7 +234,7 @@ def query(request: QueryRequest):
         )
 
     try:
-        # Prepend conversation history to the question for context-aware retrieval
+        # Prepend conversation history for context-aware retrieval
         history_context = build_history_context(session_id)
         augmented_question = (
             f"{history_context}\n\nCurrent question: {question}"
@@ -245,7 +251,6 @@ def query(request: QueryRequest):
             for doc in result.source_documents
         ]
 
-        # Store this turn in session history
         store_turn(session_id, question, result.answer)
 
         return QueryResponse(

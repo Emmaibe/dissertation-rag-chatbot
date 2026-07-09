@@ -26,3 +26,8 @@ python-dotenv==1.1.0
 # Testing
 pytest==8.3.5
 pytest-cov==6.1.0
+
+# Observability — exposes /metrics endpoint in Prometheus format
+# Automatically instruments all FastAPI endpoints with request count,
+# latency histograms, and in-progress request gauges.
+prometheus-fastapi-instrumentator==7.0.0
