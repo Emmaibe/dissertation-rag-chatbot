@@ -124,10 +124,16 @@ pipeline {
         stage('Deploy to K3s') {
             steps {
                 echo 'Deploying to Production Server via Ansible...'
-                withCredentials([sshUserPrivateKey(
-                    credentialsId: 'prod-server-ssh-key',
-                    keyFileVariable: 'SSH_KEY'
-                )]) {
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'prod-server-ssh-key',
+                        keyFileVariable: 'SSH_KEY'
+                    ),
+                    file(
+                        credentialsId: 'rag-chatbot-env',
+                        variable: 'ENV_FILE'
+                    )
+                ]) {
                     sh '''
                         scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             -r ansible \
@@ -137,15 +143,20 @@ pipeline {
                             -r k8s \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
 
+                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                            ${ENV_FILE} \
+                            ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/.env
+
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP} \
                             "ansible-playbook /home/ubuntu/ansible/deploy.yml \
                              -e image_tag=${IMAGE_TAG} \
-                             -e docker_hub_user=${DOCKER_HUB_USER}"
+                             -e docker_hub_user=${DOCKER_HUB_USER} && \
+                             rm -f /home/ubuntu/.env"
                     '''
                 }
             }
-        }
+}
 
         // ── Stage 8: Verify Deployment ────────────────────────────────────
         // Confirms all 3 replicas are Running and /health returns "healthy".

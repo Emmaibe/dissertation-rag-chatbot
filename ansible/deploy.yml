@@ -3,6 +3,8 @@
 # Emmanuel Ibenwankwo - MSc Dissertation 2025/26
 # Deploys the RAG chatbot to K3s on the Production Server.
 # Called by Jenkins Stage 7 after image is pushed to Docker Hub.
+# The .env file is copied to the server by Jenkins before this playbook
+# runs, and deleted immediately after the secret is created.
 
 - name: Deploy RAG Chatbot to K3s
   hosts: localhost
@@ -14,6 +16,7 @@
     docker_hub_user: "{{ docker_hub_user }}"
     namespace: rag-chatbot
     manifest_dir: /home/ubuntu/k8s
+    env_file: /home/ubuntu/.env
 
   tasks:
 
@@ -29,9 +32,18 @@
       command: kubectl apply -f {{ manifest_dir }}/configmap.yml
       changed_when: true
 
-    - name: Apply Secret (GROQ_API_KEY)
-      command: kubectl apply -f {{ manifest_dir }}/secret.yml
+    - name: Create K8s secret from .env file
+      shell: >
+        kubectl create secret generic rag-chatbot-secret
+        --namespace {{ namespace }}
+        --from-env-file={{ env_file }}
+        --dry-run=client -o yaml | kubectl apply -f -
       changed_when: true
+
+    - name: Remove .env file from server after secret creation
+      file:
+        path: "{{ env_file }}"
+        state: absent
 
     - name: Update image tag in deployment
       command: >
