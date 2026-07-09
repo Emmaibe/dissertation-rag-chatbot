@@ -11,6 +11,8 @@
 #   - ChromaDB data NOT baked into the image — mounted as a volume
 #     (docker -v locally; PersistentVolumeClaim under K3s).
 #   - index.html copied into /app so GET /ui can serve it.
+#   - tests/ copied into /app so pytest can run inside the container
+#     during the CI pipeline Unit Tests stage.
 
 # ---------- Stage 1: build ----------
 FROM python:3.12-slim AS builder
@@ -48,6 +50,7 @@ COPY --from=builder /build/.cache/huggingface /home/app/.cache/huggingface
 # Copy application source and data
 COPY src/ ./src/
 COPY data/ ./data/
+COPY tests/ ./tests/
 COPY chatbot.py ingest.py ./
 
 # Copy chat UI — served at GET /ui by app.py

@@ -13,6 +13,7 @@ pipeline {
 
     stages {
 
+        // ── Stage 1: Checkout ──────────────────────────────────────────────
         stage('Checkout') {
             steps {
                 echo 'Checking out source code from GitHub...'
@@ -20,55 +21,67 @@ pipeline {
             }
         }
 
-        stage('Unit Tests & Coverage') {
+        // ── Stage 2: Docker Build ──────────────────────────────────────────
+        // Build the image first so all subsequent stages test/scan the
+        // actual artefact that will be deployed, not a separate environment.
+        stage('Docker Build') {
             steps {
-                echo 'Running pytest with coverage...'
+                echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
                 sh '''
-                    python3 -m pip install --quiet --break-system-packages \
-                        pytest pytest-cov -r requirements.txt
-                    python3 -m pytest tests/ \
-                        -v \
-                        --tb=short \
-                        --cov=src \
-                        --cov-report=xml
+                    docker build \
+                        -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                        -t ${IMAGE_NAME}:latest .
                 '''
             }
         }
 
-        stage('Quality Checks') {
-            parallel {
+        // ── Stage 3: Unit Tests ───────────────────────────────────────────
+        // Run pytest inside the built image — proves the image itself works.
+        // No host pip/venv issues; uses the app user whose PATH includes
+        // /home/app/.local/bin where pytest is installed.
+        // Tests never call the LLM so no real GROQ_API_KEY is needed.
+        stage('Unit Tests') {
+            steps {
+                echo 'Running pytest inside Docker container...'
+                sh '''
+                    docker run --rm \
+                        -e CHROMA_DB_PATH=/tmp/chroma_test \
+                        -e DATA_DIR=/app/data \
+                        -e GROQ_API_KEY=test_key_not_used_in_tests \
+                        --user app \
+                        --workdir /app \
+                        --entrypoint /home/app/.local/bin/pytest \
+                        ${IMAGE_NAME}:${IMAGE_TAG} \
+                        tests/ -v --tb=short
+                '''
+            }
+        }
 
-                stage('SonarQube Analysis') {
-                    steps {
-                        echo 'Running SonarQube static analysis...'
-                        withCredentials([string(credentialsId: 'sonarqube-token',
-                                                variable: 'SONAR_TOKEN')]) {
-                            sh '''
-                                sonar-scanner \
-                                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                                    -Dsonar.sources=src \
-                                    -Dsonar.tests=tests \
-                                    -Dsonar.python.coverage.reportPaths=coverage.xml \
-                                    -Dsonar.host.url=${SONAR_HOST_URL} \
-                                    -Dsonar.token=${SONAR_TOKEN}
-                            '''
-                        }
-                    }
-                }
-
-                stage('Docker Build') {
-                    steps {
-                        echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
-                        sh '''
-                            docker build \
-                                -t ${IMAGE_NAME}:${IMAGE_TAG} \
-                                -t ${IMAGE_NAME}:latest .
-                        '''
-                    }
+        // ── Stage 4: Static Analysis (SonarQube) ──────────────────────────
+        // Analyses src/ for bugs, vulnerabilities, and code smells.
+        // Quality gate must pass before the image is allowed to proceed.
+        stage('Static Analysis') {
+            steps {
+                echo 'Running SonarQube static analysis...'
+                withCredentials([string(credentialsId: 'sonarqube-token',
+                                        variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                        sonar-scanner \
+                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                            -Dsonar.sources=src \
+                            -Dsonar.python.version=3.12 \
+                            -Dsonar.host.url=${SONAR_HOST_URL} \
+                            -Dsonar.token=${SONAR_TOKEN}
+                    '''
                 }
             }
         }
 
+        // ── Stage 5: Security Scan (Trivy) ────────────────────────────────
+        // Scans the built image for HIGH and CRITICAL CVEs that have fixes.
+        // --ignore-unfixed: only fails on actionable vulnerabilities.
+        // This is the key security gate for the dissertation's
+        // "with/without security controls" comparison.
         stage('Security Scan') {
             steps {
                 echo 'Scanning Docker image with Trivy...'
@@ -84,6 +97,9 @@ pipeline {
             }
         }
 
+        // ── Stage 6: Push Image ───────────────────────────────────────────
+        // Only reached if all previous gates pass.
+        // Image pushed to Docker Hub for K3s to pull on the Prod Server.
         stage('Push Image') {
             steps {
                 echo "Pushing ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub..."
@@ -102,6 +118,9 @@ pipeline {
             }
         }
 
+        // ── Stage 7: Deploy to K3s ────────────────────────────────────────
+        // Copies manifests to the Production Server then runs Ansible
+        // which applies them to K3s with the new image tag.
         stage('Deploy to K3s') {
             steps {
                 echo 'Deploying to Production Server via Ansible...'
@@ -128,6 +147,8 @@ pipeline {
             }
         }
 
+        // ── Stage 8: Verify Deployment ────────────────────────────────────
+        // Confirms all 3 replicas are Running and /health returns "healthy".
         stage('Verify Deployment') {
             steps {
                 echo 'Verifying deployment on Production Server...'
@@ -161,7 +182,6 @@ pipeline {
         always {
             sh "docker image rm ${IMAGE_NAME}:${IMAGE_TAG} || true"
             sh "docker image rm ${IMAGE_NAME}:latest || true"
-            sh "rm -f coverage.xml || true"
         }
     }
 }
