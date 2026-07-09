@@ -35,24 +35,6 @@ pipeline {
             }
         }
 
-        stage('Debug Python') {
-            steps {
-                sh '''
-                docker run --rm \
-                    --entrypoint /bin/sh \
-                    ${IMAGE_NAME}:${IMAGE_TAG} \
-                    -c "
-                        whoami
-                        which python
-                        python --version
-                        python -m site
-                        python -m pip show pytest || true
-                        python -c 'import sys; print(sys.path)'
-                    "
-                '''
-            }
-        }
-
         // ── Stage 3: Unit Tests ───────────────────────────────────────────
         // Run pytest inside the built image — proves the image itself works.
         // No host pip/venv issues; uses the app user whose PATH includes

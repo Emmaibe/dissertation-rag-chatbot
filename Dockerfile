@@ -24,16 +24,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install CPU-only torch FIRST so sentence-transformers does not pull CUDA
-RUN pip install --no-cache-dir --user \
+RUN pip install --no-cache-dir \
     torch==2.5.1+cpu \
     --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --user -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Explicitly install test dependencies so they are available when
 # running pytest inside the container during the CI pipeline
-RUN pip install --no-cache-dir --user pytest pytest-cov
+RUN pip install --no-cache-dir pytest pytest-cov
 
 # Pre-download embedding model for fast cold start (no HuggingFace at runtime)
 ARG EMBEDDING_MODEL=all-MiniLM-L6-v2
@@ -48,7 +48,7 @@ RUN groupadd --system app && useradd --system --gid app --home /app app
 WORKDIR /app
 
 # Copy installed packages and cached model from builder
-COPY --from=builder /root/.local /home/app/.local
+COPY --from=builder /usr/local /usr/local
 COPY --from=builder /build/.cache/huggingface /home/app/.cache/huggingface
 
 # Copy application source and data
