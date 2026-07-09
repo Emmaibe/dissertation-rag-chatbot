@@ -70,6 +70,7 @@ pipeline {
                         -e CHROMA_DB_PATH=/tmp/chroma_test \
                         -e DATA_DIR=/app/data \
                         -e GROQ_API_KEY=test_key_not_used_in_tests \
+                        --user app \
                         --workdir /app/src \
                         --entrypoint python \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
