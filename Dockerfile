@@ -31,6 +31,10 @@ RUN pip install --no-cache-dir --user \
 COPY requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt
 
+# Explicitly install test dependencies so they are available when
+# running pytest inside the container during the CI pipeline
+RUN pip install --no-cache-dir --user pytest pytest-cov
+
 # Pre-download embedding model for fast cold start (no HuggingFace at runtime)
 ARG EMBEDDING_MODEL=all-MiniLM-L6-v2
 ENV HF_HOME=/build/.cache/huggingface
