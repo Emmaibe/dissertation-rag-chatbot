@@ -48,11 +48,11 @@ pipeline {
                         -e CHROMA_DB_PATH=/tmp/chroma_test \
                         -e DATA_DIR=/app/data \
                         -e GROQ_API_KEY=test_key_not_used_in_tests \
+                        -e PYTHONPATH=/app/src \
                         --user app \
                         --workdir /app \
-                        --entrypoint /home/app/.local/bin/pytest \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
-                        tests/ -v --tb=short
+                        python -m pytest tests/ -v --tb=short
                 '''
             }
         }
