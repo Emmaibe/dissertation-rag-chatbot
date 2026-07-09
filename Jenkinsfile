@@ -173,6 +173,9 @@ pipeline {
                             "sudo kubectl get pods -n rag-chatbot && \
                              sudo kubectl rollout status deployment/rag-chatbot \
                                  -n rag-chatbot --timeout=120s && \
+                             sleep 60 && \
+                             curl -sf -X POST http://localhost:30080/ingest && \
+                             sleep 30 && \
                              curl -sf http://localhost:30080/health | \
                              python3 -c \\"import sys,json; \
                                  d=json.load(sys.stdin); \

@@ -13,6 +13,9 @@
 #   - index.html copied into /app so GET /ui can serve it.
 #   - tests/ copied into /app so pytest can run inside the container
 #     during the CI pipeline Unit Tests stage.
+#   - CHROMA_DB_PATH and DATA_DIR intentionally omitted from ENV so
+#     they are injected exclusively by the K8s ConfigMap at runtime,
+#     preventing the Dockerfile defaults from overriding the cluster config.
 
 # ---------- Stage 1: build ----------
 FROM python:3.12-slim AS builder
@@ -60,11 +63,11 @@ COPY chatbot.py ingest.py ./
 # Copy chat UI — served at GET /ui by app.py
 COPY index.html ./index.html
 
-ENV PATH=/home/app/.local/bin:$PATH \
-    PYTHONUNBUFFERED=1 \
-    HF_HOME=/home/app/.cache/huggingface \
-    CHROMA_DB_PATH=/data/chroma_db \
-    DATA_DIR=/app/data
+# CHROMA_DB_PATH and DATA_DIR are deliberately excluded here.
+# They are injected by the K8s ConfigMap (rag-chatbot-config) at runtime
+# so the cluster config always takes precedence over any baked-in defaults.
+ENV PYTHONUNBUFFERED=1 \
+    HF_HOME=/home/app/.cache/huggingface
 
 VOLUME ["/data/chroma_db"]
 
