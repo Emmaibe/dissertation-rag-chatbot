@@ -7,317 +7,431 @@ Source: https://www.gcu.ac.uk/currentstudents/essentials/modules
 ======================================================================
 
 MODULE: 3D Production for Virtual Reality
-Code: MMI126424 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI126424
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI126424
 
+Key Facts: The 3D Production for Virtual Reality module (MMI126424) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module provides the student with an opportunity to explore three dimensional scanning, three dimensional computer aided prototype development, virtual, augmented and mixed reality application development with respect to specific industries.
 Students will gain an understanding of how their academic studies relate to current industrial practice and how the skills they have acquired in their named programme might be applied. The module is designed to enable students to gain an insight into best practice in their field with reference to current technologies, workflow and production methods. Where appropriate, external guest lectures will provide specific industry content. This module should also provide an opportunity for the students to explore and evaluate emerging technologies which may be employed within, or form a research topic for their MSc dissertation project. Students will investigate and demonstrate knowledge of a range of digital media tools and techniques for the promotion of skills within real and virtual worlds. Critical analysis of emerging three dimensional scanning and digital production techniques, tools and applications.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Academic Writing for Masters
-Code: MMX230318 | SCQF Level: 11 | Credits: 0 | Subject: SCEBE Learning and Teaching
+Module Code: MMX230318
+SCQF Level: 11
+Credits: 0 credits
+Subject Area: SCEBE Learning and Teaching
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMX230318
 
-Academic essentials
+Key Facts: The Academic Writing for Masters module (MMX230318) is worth 0 credits at SCQF Level 11 in the SCEBE Learning and Teaching subject area.
+
+Module Description:
 Timetables and term dates
-Student records and documents
-Learning Development Centres
-Student attendance monitoring
 Thinking of changing or leaving your course
 Exams
 Archives
-Modules
+Funding
+Careers
+Life on campus
+Get involved
+Feedback
+Student news
+Home
+Module detail
+Academic Writing for Masters
+SHE level	11
+SCQF credit points	0
+ECTS credit points	0
+Module code	MMX230318
+Module Leader	Melanie Grey
+School	School of Science & Engineering
+Subject	SCEBE Learning and Teaching
+Trimester	A (September start), B (January start)
 
 ----------------------------------------------------------------------
 
 MODULE: Advanced Operating Systems
-Code: MMI130764 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI130764
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI130764
 
+Key Facts: The Advanced Operating Systems module (MMI130764) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module explores the principles, design, and implementation of advanced operating systems. The module delves into concepts such as process synchronization, inter-process communication, distributed file systems, virtualization, and access control. Students will gain hands-on experience through practical assignments and develop an understanding of contemporary operating system architectures that underpin modern cloud-based and large-scale computing environments.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Advanced Programming
-Code: MMI330759 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330759
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330759
 
+Key Facts: The Advanced Programming module (MMI330759) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module assumes that students already have experience on, at least, one object-oriented programming language. It aims to help students becoming better and more versatile programmers. Students will be equipped with a broad understanding of the nature of a range of programming paradigms, and the support provided for each paradigm in currently popular programming languages, enabling to make appropriate choices to best meet the requirements of a specific programming problem. The module also introduces a range of advanced programming techniques such as asynchronous messaging, parallel computation and distributed programming. The module will additionally analyse the energy costs of computation, its current environmental impact, and review a number of advanced techniques aimed to reduce this impact.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Advanced Topics in Human Computer Interaction
-Code: MMG527109 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMG527109
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG527109
 
+Key Facts: The Advanced Topics in Human Computer Interaction module (MMG527109) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 Human Computer Interaction (HCI) broadens out to encompass more of how users experience computing systems (UX), and how they may change the way people work. This includes the ease of use and enjoyability of the product, and affective reactions more generally, including for games and other enjoyable technologies. This advanced module builds on the earlier foundational module for HCI, to the point where students can design and conduct their own user studies for various types of applications and computing devices in recently developing technologies.
 Wider notions of affect will be covered, including the centrality of human emotion and personality to the user experience, for games and other entertainment devices, for social media platforms, and for the potential uses of technologies to support negotiation and problem solving between humans and even artificial agents. Students should thus be better prepared to consider more career options, as they will be able to contribute to the analysis as well as design of a wide range of industrial products and services.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Applied Usability
-Code: MMI127112 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI127112
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127112
 
+Key Facts: The Applied Usability module (MMI127112) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module provides advanced theoretical and practical insight into usability research skills and project work, advanced user psychology, and practical skill in usability methods, to equip students to assess, capture, explore, evaluate and communicate parameters of user experience. Informed by Industry, the module focuses on the conceptualisation, justification and execution of a usability investigation to solve current usability issues in contextualised design. Lecture Topics include application of qualitative and quantitative research methods, individual and group report writing, applied usability testing, playtesting, measurement and communication of emotional, social, physiological and cognitive parameters of user experience. The module will provide students with core understanding of and skill in the design, analysis, evaluation and knowledge transfer of usability testing solutions for a wide range of design and stakeholder contexts.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Applied User Psychology
-Code: MMI127111 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI127111
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127111
 
+Key Facts: The Applied User Psychology module (MMI127111) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module provides grounding in applied User Psychology applying key Psychological Principles and Practices to informing both better-understanding of ourselves as designers and those who engage with our designs. The module will provide students with: working knowledge of the behaviour and mental processes of the user in relation to user design psychological approaches to designing, evaluating and communicating user experience, practical skill to apply Principles of Psychology to design examples, and academic writing and critical thinking skills to carry out, collate and communicate the importance of Psychology in Design to a range of key stakeholders.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Artificial Intelligence and Machine Learning
-Code: MMI226824 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226824
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226824
 
+Key Facts: The Artificial Intelligence and Machine Learning module (MMI226824) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module covers the fundamental concepts, theory and techniques that enable artificial intelligence (AI). It focuses on the history, basic and advanced methods of AI and their practical uses in today's society and businesses. Students will learn the role of machine learning and deep learning in modern AI and will apply and implement traditional and modern AI methods based on real world examples. By the end of this module students will have gained an advanced understanding in the core concepts of AI and are able to determine whether a problem-solving approach using AI is appropriate, how to implement it and then evaluate it efficiently using local as well cloud-based tools.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Big Data Landscape
-Code: MMI226831 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226831
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226831
 
+Key Facts: The Big Data Landscape module (MMI226831) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module covers the process of managing Big Data throughout its lifecycle, from requirements through retirement. The lifecycle crosses different application systems, databases and storage media. Students will gain an understanding of the full Big Data value chain. They will be able to analyze the challenges and opportunities associated with the different stages which Big Data passes through.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Big Data Platforms
-Code: MMI227050 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI227050
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI227050
 
+Key Facts: The Big Data Platforms module (MMI227050) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module covers the platforms that support data storage, processing and analytics in Big Data scenarios. It focuses on highly scalable platforms that provide operational capabilities for real-time, interactive processing and on platforms that provide analytical capabilities for retrospective, complex analysis. Students will gain an advanced understanding of the principles on which these platforms are based, and their strengths, weaknesses and applicability to different types of scenario. They will also gain advanced practical skills in the design and implementation of scalable Big Data platform solutions.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Cloud Computing and Web Services
-Code: MMI226816 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226816
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226816
 
+Key Facts: The Cloud Computing and Web Services module (MMI226816) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module provides analytical and practical coverage of cloud computing and web services. It focuses on the technology, frameworks and associated standards: cloud models, cloud platforms and scalability. It also provides coverage of current web service technology and data transport representations, and integrated cloud and web service application development. Current examples from industry technology are used throughout
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Cloud Operations and Security
-Code: MMI330761 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330761
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330761
 
+Key Facts: The Cloud Operations and Security module (MMI330761) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module covers the fundamental concepts and techniques that enable cloud operations and security. It focuses on the management and security of the cloud infrastructure, compute, storage, and networking resources and their automation. Students will learn about the importance of cloud operations and cloud security for managing modern cloud applications and their monitoring, optimisation and compliance. By the end of this module, students will gain an advanced understanding of managing cloud workloads and are able to implement these principles using a cloud platform.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Cyber Defence and Penetration Testing
-Code: MMI125226 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125226
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125226
 
+Key Facts: The Cyber Defence and Penetration Testing module (MMI125226) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module focuses on teaching the methods and techniques used in penetration testing. This is the practice of legally and ethically
 assessing the security of systems and networks by identifying possible weaknesses. The overall aim of penetration testing is strengthening defences through the means of attacks. The aim of this module is to appreciate the various stages of a penetration test, while analysing how ethical hackers can use tools to break into insecure network systems and how these attacks may be mitigated. The module examines hacking techniques used to break into networked systems, and explores the usage of malware in the context of a hacking attack.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Cyber Forensics and Incident Response
-Code: MMI125225 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125225
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125225
 
+Key Facts: The Cyber Forensics and Incident Response module (MMI125225) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 The prevalence of cyber security incidents highlights the increase of potential risks in the digital arena. These vulnerabilities are fuelling the growing need for skilled professionals who can protect systems from attack, respond to security breaches and solve cybercrimes. This module builds on an understanding of the main principles behind digital forensics, together with the procedures for securing and analysing evidence to support investigations. It introduces the construction and development of different types of malicious code, including their implementation and methods of action in exploiting system weaknesses.
 The module focuses on the development of crucial analytical techniques for responding to security breaches and investigating cyber incidents. This includes the analysis, evaluation and reverse engineering of malicious code for forensic examination as well as the development of strategies useful for defending and recovering from attacks. The ethical and professional issues/requirements of the professional practitioner are incorporated throughout the syllabus.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Data Ethics and Research Methods
-Code: MMI226823 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226823
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226823
 
+Key Facts: The Data Ethics and Research Methods module (MMI226823) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module seeks to develop understanding and practical skills in advanced research methods which are in line with industry regulations, standards and practices and are applicable to complex Data Science projects. Study is undertaken in an integrated fashion to ensure that the professional framework within which such projects are developed, deployed and managed are fully understood.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Data Visualisation
-Code: MMI226820 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226820
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226820
 
+Key Facts: The Data Visualisation module (MMI226820) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This course aims to equip students with knowledge and skills required for successful data visualisation. The goal of data visualisation is to expose the underlying structure of a dataset using visual representations which are targeted towards the human visual perceptual system. Students will gain experience in the theory, design, implementation and evaluation of data visualisation systems. Appropriate software tools will be utilised throughout the module to create effective visual representations to translate complex data into clear information, allowing the target audience to extract value from it. Students will learn how to use advanced visualisation techniques such as data storytelling and interactive visualisations to communicate information clearly. By the end of this module, students will be capable of analysing the appropriateness of a given visualisation in relation to a problem, select and implement appropriate data visualisation systems for a given dataset and evaluate the effectiveness of this system.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Database Systems
-Code: MMI230702 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI230702
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI230702
 
+Key Facts: The Database Systems module (MMI230702) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 The Database Systems module introduces students to the fundamental concepts of database management systems (DBMS), focusing on both theoretical principles and practical applications. Students will learn about various types of databases, data models, database design, querying languages, and database management techniques.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Digital Media Commercialisation
-Code: MMI125049 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI125049
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125049
 
+Key Facts: The Digital Media Commercialisation module (MMI125049) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module allows the student to progress the work from the Digital Media Publishing module and develop the visualisation quality. The intention is to provide the student with a full understanding of the subject relevant to the development of a digital media project to broadcast and commercial production standards and to provide the opportunity for the student to utilise creative workflows and technology suited to their relevant pathway.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Digital Media Development
-Code: MMI125050 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI125050
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125050
 
+Key Facts: The Digital Media Development module (MMI125050) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module allows a student to develop an understanding of the core digital media technologies, encompassed within digital video, audio, and 3 Dimensional Animation production techniques. The focus of the module will be to provide the student with the core production skills leading to the development of 3D based digital media animations, applications or assets.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Digital Media Publishing
-Code: MMI125051 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI125051
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125051
 
+Key Facts: The Digital Media Publishing module (MMI125051) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module allows the student to progress the skills acquired in semester A. The intention is to provide the student with a full understanding of the subject material relevant to the development of a digital media project to broadcast and commercial production standards and to provide the opportunity for the student to utilise creative workflows and technology suited to their relevant pathway. This module will allow the student to digitally enhance and publish digital content using industry relevant skills in relation to their elected pathway.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Digital Media Technology
-Code: MMI125052 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI125052
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125052
 
+Key Facts: The Digital Media Technology module (MMI125052) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module allows a student to develop an understanding of the core digital media pre production technologies,
 encompassed within digital video, audio, and 3 Dimensional Animation production techniques. The focus of the module will be to assist the student in the development of research and pre-production skills based on the practical
 application of 3D digital media, to enable the production of a media solution to a given brief.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Dissertation
-Code: MMG411931 | SCQF Level: 11 | Credits: 60 | Subject: Computing
+Module Code: MMG411931
+SCQF Level: 11
+Credits: 60 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG411931
 
+Key Facts: The Dissertation module (MMG411931) is worth 60 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module is concerned with the development and presentation of an MSc Dissertation on a topic relevant to the student's named programme. The dissertation project will be based on the proposal prepared by the student prior to the start of the MSc Dissertation project period. A series of facilitation sessions are provided to support students in developing their MSc Dissertation proposals, including guidance on how to clearly set out the Background, Objectives, Methods and Work-plan. The project is essentially an independent piece of development or research work, and the skills necessary to carry this through will derive from the programme's taught modules . Students will be provided with up to 2 hours guidance in the form of technical consultancy and with up to 6 hours guidance in the form of process consultancy.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Fundamentals of Routing and Switching
-Code: MMI125978 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125978
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125978
 
+Key Facts: The Fundamentals of Routing and Switching module (MMI125978) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module aims to provide students with the theoretical knowledge and practical skills needed to determine appropriate design choices for layer 2 and layer 3 solutions, implement them and verify their operation. The percentage of Work Based Learning for this module, as represented by the proportion of the Activity Types which take place off campus, is 74%. The percentage of Work Based Assessment for this module is 10%.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Human Computer Interaction
-Code: MMI127126 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI127126
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127126
 
+Key Facts: The Human Computer Interaction module (MMI127126) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module introduces the academic discipline of Human Computer Interaction.
@@ -326,275 +440,352 @@ The module explores the multi-disciplinary nature of Human Computer Interaction 
 
 As HCI covers the major phases of development analysis, design, development and testing the module content is designed to move progressively through these phases. You will be studying theories and techniques intended to support the analysis of problems for which technology is the intended solution. Each week you will be introduced to various theories, tools and techniques which you will study, learn, and then go onto apply these in practical classes and demonstrate an understanding within your own coursework.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Information Security
-Code: MMI230701 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI230701
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI230701
 
+Key Facts: The Information Security module (MMI230701) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module is designed to provide students with advanced knowledge and practical skills in securing digital information and systems. With the increasing importance of data protection and privacy in information systems, this module aims to equip students with the necessary tools and techniques to address a range of cybersecurity challenges. Topics covered include cryptography, secure software development, risk management, and emerging threats.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Information Security Management
-Code: MMI125227 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125227
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125227
 
+Key Facts: The Information Security Management module (MMI125227) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module will examine strategic approaches that can be taken to manage organisational resilience. It will focus on areas critical to maintaining resilience on both a day to day operational basis and in the event of a crisis situation. Specifically it will cover information security management and risk management in relation to IT systems and data. All of the above will be set in the context of an organisation's cyber security strategy.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Masters Project
-Code: MMI125238 | SCQF Level: 11 | Credits: 60 | Subject: Computer Networks & Security
+Module Code: MMI125238
+SCQF Level: 11
+Credits: 60 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125238
 
+Key Facts: The Masters Project module (MMI125238) is worth 60 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 The Project acts as a vehicle for extending the knowledge and understanding of the student and the technical community in some specialist technical area. It serves, through its length, complexity and rigour, as a suitable vehicle for extending, in the student, a range of personal, interpersonal and communication skills. In addition, it serves to develop and extend a range of high-level "thinking" skills, including analysing and synthesising skills and affords the opportunity for the student to demonstrate initiative and creativity in a major piece of technological work.
-
-Module details
-Syllabus
 
 ----------------------------------------------------------------------
 
 MODULE: Motion Graphics and Visual Effects
-Code: MMG525053 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMG525053
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG525053
 
+Key Facts: The Motion Graphics and Visual Effects module (MMG525053) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module will require students to understand and demonstrate a practical knowledge of digital motion graphics and visual effects. Combined with Video Editing and Compositing students shall combine editing and Motion Graphics/Vfx for appropriate delivery. Application of creative technique will cover elective areas such as Use of Green screen, Matchmoving Motion Graphics and Animation for composition, title sequence generation and general compositing techniques
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: MSc Project
-Code: MMH727233 | SCQF Level: 11 | Credits: 60 | Subject: Applied Computer Games
+Module Code: MMH727233
+SCQF Level: 11
+Credits: 60 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMH727233
 
+Key Facts: The MSc Project module (MMH727233) is worth 60 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 The Project acts as a vehicle for extending the knowledge and understanding of the student and the technical community in some specialist technical area. It serves, through its length, complexity and rigour, as a suitable vehicle for extending, in the student, a range of personal, interpersonal and communication skills. In addition, it serves to develop and extend a range of high-level "thinking" skills, including analysing and synthesising skills and affords the opportunity for the student to demonstrate initiative and creativity in a major piece of technological work.
-
-Module details
-Syllabus
 
 ----------------------------------------------------------------------
 
 MODULE: Network Security
-Code: MMI125234 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125234
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125234
 
+Key Facts: The Network Security module (MMI125234) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module aims to provide students with the ability to analyse and plan network security solutions using an in-depth understanding of network security principles, and technologies. The module will provide the practical experience needed to construct and verify the effectiveness of network security tools and their configuration in a modern business environment.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Programming Principles
-Code: MMI330703 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330703
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330703
 
+Key Facts: The Programming Principles module (MMI330703) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module provides students with an understanding of fundamental programming principles that are essential for designing, implementing, and maintaining software solutions. The module will make use of a suitable high level programming language to explore object oriented programming principles and a range of functional programming features commonly found in modern languages. Students will also learn about a range of program development practices, and the ways in which these can be used appropriately to solve contemporary software development challenges.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Project (MSc 3D)
-Code: MMH724274 | SCQF Level: 11 | Credits: 60 | Subject: Applied Computer Games
+Module Code: MMH724274
+SCQF Level: 11
+Credits: 60 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMH724274
 
+Key Facts: The Project (MSc 3D) module (MMH724274) is worth 60 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 The Project acts as a vehicle for extending the knowledge and understanding of the student and the technical community in some specialist technical area. It serves, through its length, complexity and rigour, as a suitable vehicle for extending, in the student, a range of personal, interpersonal and communication skills. In addition, it serves to develop and extend a range of high-level "thinking" skills, including analysing and synthesising skills and affords the opportunity for the student to demonstrate initiative and creativity in a major piece of technological work.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Research and Project Methods
-Code: MMI125235 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125235
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125235
 
+Key Facts: The Research and Project Methods module (MMI125235) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module aims to provide students with the background knowledge and skills that, in combination with the technical skills acquired in other taught modules, will enable them to carry an MSc Dissertation through to a successful conclusion.
 Students will study all aspects of the processes underlying both capstone projects and research projects, and will relate these to available tools, ethical considerations and professional issues. By the end of the module the student will have produced a viable proposal for a 12 person-week full implementation of a dissertation project that when successfully completed will be worthy of the award of an MSc.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Research Studies for Computing and Creative Technologies
-Code: MMG526752 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMG526752
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG526752
 
+Key Facts: The Research Studies for Computing and Creative Technologies module (MMG526752) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module aims to provide students with the background knowledge, critical thinking, reading, writing, presentational and project management skills that will both enhance their performance in taught modules and, in combination with the technical and professional skills acquired in other taught modules, will enable them to carry their Masters Dissertation through to a successful conclusion.
 
 Particular attention is paid to enhancing students' analytical thinking and writing skills. Students will develop critical reading skills by reading and critiquing different technical articles, research papers and other valid sources that could support the literature and contextual review of their proposal. This will help students prepare for the production of a detailed report in the form of a project proposal backed up by a survey of the appropriate body of knowledge and technology by the end of Trimester B. Students will be required to give an oral presentation of the baseline, aims, objectives and methods of their proposed project, supported by appropriate visual materials, as part of the assessment process.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Secure Connectivity
-Code: MMI125979 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI125979
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI125979
 
+Key Facts: The Secure Connectivity module (MMI125979) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module aims to provide students with the theoretical knowledge and practical skills needed to determine appropriate design choices for virtual private network and security solutions, implement them and verify their operation. The percentage of Work Based Learning for this module, as represented by the proportion of the Activity Types which take place off campus, is 74%. The percentage of Work Based Assessment for this module is 10%.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Secure Operations
-Code: MMI126277 | SCQF Level: 11 | Credits: 15 | Subject: Computer Networks & Security
+Module Code: MMI126277
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computer Networks & Security
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI126277
 
+Key Facts: The Secure Operations module (MMI126277) is worth 15 credits at SCQF Level 11 in the Computer Networks & Security subject area.
+
+Module Description:
 Summary of content
 
 This module provides students with the knowledge and skills needed to evaluate the complex threat environment facing today's organisations. The module will enable students to perform the functions needed to secure networks and services in a security operations centre environment.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Software Architecture
-Code: MMI330762 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330762
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330762
 
+Key Facts: The Software Architecture module (MMI330762) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module provides software systems design using common software architecture patterns for cloud-native and modern applications including: microservices, serverless, event-driven architectures. It also covers design techniques for achieving software scalability, maintainability and resilience by leveraging concurrency and distributed architecture. This module covers how to communicate software architecture design through architecture diagrams and documentation.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Software Development for Data Science
-Code: MMI226822 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI226822
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI226822
 
+Key Facts: The Software Development for Data Science module (MMI226822) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module will focus on the development of software programming skills used for data science using an appropriate programming language such as Python or R. Implementation methods for the foundation topics in data science such as data capture, wrangling, analysis, processing, visualisation and reproducible reports will be covered. The student will gain an understanding of the various data science software ecosystems in order to apply statistical data analysis techniques (descriptive and inferential), machine learning and information visualisation techniques. This will be introduced via practical examples using both data simulation and real-world datasets to allow the student to make decisions that are supported by data.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Software Engineering and DevOps
-Code: MMI330704 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330704
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330704
 
+Key Facts: The Software Engineering and DevOps module (MMI330704) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module provides analytical and practical coverage of software engineering and DevOps.
 It covers Software Engineering technology, programming languages, software development environments, frameworks and associated processes that can be used and automated in the production, deployment and testing of reliable software components and systems that meet specified requirements. It also provides coverage of example Development / Operations (Dev/Ops) practices and the supporting technology used to develop practical pipelines for the automated production, testing and deployment of software systems. Current examples from industry are used throughout including coverage in detail of the capabilities provided by specific cloud platform providers.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Team Project
-Code: MMI330760 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330760
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330760
 
+Key Facts: The Team Project module (MMI330760) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module provides students with the opportunity to apply skills in a group project setting based around an environmental context. It will cover environmental topics such as sustainability and green computing. It also provides coverage of development approaches and environments as well as the roles within a professional development team. Students will be taught about professional development, identifying areas of improvement while working on the project. Students will work across the entire breadth of the software development lifecycle including, conceptualisation, design, implementation, testing and documentation and presentation.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: UX Design Project
-Code: MMI127110 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI127110
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127110
 
+Key Facts: The UX Design Project module (MMI127110) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 The module introduces practical skills to design and develop user experiences and interfaces for digital systems.
 The aim of the module is to enable students to understand and apply the User Experience design process in order to create solutions to identified problems, that meet business and user stakeholder needs. By considering business needs and constraints, user needs and goals, task analysis, information architecture, user flow and visual design principles, students aim to design accessible, intuitive and desirable user experiences.
 The module is practical based affording students the opportunity to apply an iterative approach to design by designing and testing interactive prototypes.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Video Editing and Compositing
-Code: MMG525055 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMG525055
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMG525055
 
+Key Facts: The Video Editing and Compositing module (MMG525055) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module will require students to understand and demonstrate a practical knowledge of digital video / film production techniques and the association of compositing for production. Application of creative technique will cover elective areas such as short film production, documentary production, 3D animation composition, title sequence generation and general compositing techniques
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Visual Design and Prototyping
-Code: MMI127131 | SCQF Level: 11 | Credits: 15 | Subject: Applied Computer Games
+Module Code: MMI127131
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Applied Computer Games
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI127131
 
+Key Facts: The Visual Design and Prototyping module (MMI127131) is worth 15 credits at SCQF Level 11 in the Applied Computer Games subject area.
+
+Module Description:
 Summary of content
 
 This module introduces the practical skills, processes and techniques involved in creating User Interface designs for digital systems.
 
 The aim of the module is to enable students to apply the User Interface design principles in order to create effective visual design solutions. By considering brand personality, typography fundamentals, colour styles, layout techniques, iconography and images, prototyping and interactivity, students will apply the knowledge and practical skills required to design and plan effective and functional user interfaces.
 
-Module details
-Syllabus
-
 ----------------------------------------------------------------------
 
 MODULE: Web Application Development
-Code: MMI330763 | SCQF Level: 11 | Credits: 15 | Subject: Computing
+Module Code: MMI330763
+SCQF Level: 11
+Credits: 15 credits
+Subject Area: Computing
+School: School of Science & Engineering, Glasgow Caledonian University
 URL: https://www.gcu.ac.uk/currentstudents/essentials/modules/module-detail?module=MMI330763
 
+Key Facts: The Web Application Development module (MMI330763) is worth 15 credits at SCQF Level 11 in the Computing subject area.
+
+Module Description:
 Summary of content
 
 This module will introduce the techniques used in the development of scalable modern web applications. it will review the range of technologies available and consider the industry standard libraries, frameworks and templates used to facilitate the development process. The module will develop an understanding of how web applications are designed, developed and deployed alongside an understanding of the security issues involved.
-
-Module details
-Syllabus
 
 ----------------------------------------------------------------------

@@ -150,17 +150,30 @@ def ingest_documents():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+GREETINGS = {"hi", "hello", "hey", "how are you", "what can you do", "help"}
+
 @app.post("/query", response_model=QueryResponse, tags=["Query"])
 def query(request: QueryRequest):
     """
     Query the RAG chatbot with a natural language question.
     Returns the answer, source documents, and latency metrics.
     """
+
     if pipeline is None:
         raise HTTPException(status_code=503, detail="Pipeline not initialised")
 
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
+
+    q = request.question.strip().lower().rstrip("?!.")
+    if q in GREETINGS:
+        return QueryResponse(
+            question=request.question,
+            answer="Hello! I'm the GCU DevSecOps Knowledge Assistant. I can answer questions about MSc Computer Science modules at Glasgow Caledonian University. Try asking me about a specific module, assessment methods, or credit values.",
+            source_documents=[],
+            metrics={"retrieval_latency_ms": 0, "generation_latency_ms": 0, "total_latency_ms": 0,
+                     "num_chunks_retrieved": 0}
+        )
 
     try:
         result: RAGResponse = pipeline.query(request.question)
