@@ -23,8 +23,7 @@ chroma_db/
 .git/
 .gitignore
 
-# Tests / dev tooling (not needed at runtime; CI runs these separately)
-tests/
+# dev tooling (not needed at runtime; CI runs these separately)
 .pytest_cache/
 .coverage
 htmlcov/
