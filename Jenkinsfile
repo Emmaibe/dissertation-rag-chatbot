@@ -5,7 +5,7 @@ pipeline {
         DOCKER_HUB_USER   = 'lordibe'
         IMAGE_NAME        = 'lordibe/rag-chatbot'
         IMAGE_TAG         = "${BUILD_NUMBER}"
-        SONAR_HOST_URL    = 'http://54.90.233.69:9000'
+        SONAR_HOST_URL    = 'http://54.204.237.137:9000'
         SONAR_PROJECT_KEY = 'rag-chatbot'
         PROD_SERVER_IP    = '172.31.35.255'
         PROD_SERVER_USER  = 'ubuntu'
