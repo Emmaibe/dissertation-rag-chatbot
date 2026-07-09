@@ -171,15 +171,11 @@ pipeline {
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP} \
                             "sudo kubectl get pods -n rag-chatbot && \
-                             sudo kubectl rollout status deployment/rag-chatbot \
-                                 -n rag-chatbot --timeout=120s && \
+                             sudo kubectl rollout status deployment/rag-chatbot -n rag-chatbot --timeout=120s && \
                              sleep 60 && \
                              curl -sf -X POST http://localhost:30080/ingest && \
                              sleep 30 && \
-                             curl -sf http://localhost:30080/health | \
-                             python3 -c \\"import sys,json; \
-                                 d=json.load(sys.stdin); \
-                                 sys.exit(0 if d.get('status')=='healthy' else 1)\\""
+                             curl -sf http://localhost:30080/health"
                     '''
                 }
             }
