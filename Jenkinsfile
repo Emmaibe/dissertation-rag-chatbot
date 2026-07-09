@@ -24,9 +24,9 @@ pipeline {
             steps {
                 echo 'Running pytest with coverage...'
                 sh '''
-                    pip install --quiet --break-system-packages \
+                    python3 -m pip install --quiet --break-system-packages \
                         pytest pytest-cov -r requirements.txt
-                    pytest tests/ \
+                    python3 -m pytest tests/ \
                         -v \
                         --tb=short \
                         --cov=src \
