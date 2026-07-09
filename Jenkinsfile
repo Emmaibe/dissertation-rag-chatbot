@@ -20,31 +20,54 @@ pipeline {
             }
         }
 
-        stage('Static Analysis') {
+        stage('Unit Tests & Coverage') {
             steps {
-                echo 'Running SonarQube static analysis...'
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                    sh '''
-                        sonar-scanner \
-                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                            -Dsonar.sources=src \
-                            -Dsonar.python.version=3.12 \
-                            -Dsonar.host.url=${SONAR_HOST_URL} \
-                            -Dsonar.token=${SONAR_TOKEN}
-                    '''
-                }
+                echo 'Running pytest with coverage...'
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --quiet --upgrade pip
+                    pip install --quiet -r requirements.txt
+                    pytest tests/ \
+                        -v \
+                        --tb=short \
+                        --cov=src \
+                        --cov-report=xml
+                '''
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
-                sh '''
-                    docker build \
-                        -t ${IMAGE_NAME}:${IMAGE_TAG} \
-                        -t ${IMAGE_NAME}:latest \
-                        .
-                '''
+        stage('Quality Checks') {
+            parallel {
+
+                stage('SonarQube Analysis') {
+                    steps {
+                        echo 'Running SonarQube static analysis...'
+                        withCredentials([string(credentialsId: 'sonarqube-token',
+                                                variable: 'SONAR_TOKEN')]) {
+                            sh '''
+                                sonar-scanner \
+                                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.tests=tests \
+                                    -Dsonar.python.coverage.reportPaths=coverage.xml \
+                                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                                    -Dsonar.token=${SONAR_TOKEN}
+                            '''
+                        }
+                    }
+                }
+
+                stage('Docker Build') {
+                    steps {
+                        echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
+                        sh '''
+                            docker build \
+                                -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                                -t ${IMAGE_NAME}:latest .
+                        '''
+                    }
+                }
             }
         }
 
@@ -53,28 +76,12 @@ pipeline {
                 echo 'Scanning Docker image with Trivy...'
                 sh '''
                     trivy image \
-                        --exit-code 0 \
                         --severity HIGH,CRITICAL \
+                        --ignore-unfixed \
+                        --exit-code 1 \
                         --no-progress \
                         --format table \
                         ${IMAGE_NAME}:${IMAGE_TAG}
-                '''
-            }
-        }
-
-        stage('Unit Tests') {
-            steps {
-                echo 'Running pytest unit tests inside Docker container...'
-                sh '''
-                    docker run --rm \
-                        -e CHROMA_DB_PATH=/tmp/chroma_test \
-                        -e DATA_DIR=/app/data \
-                        -e GROQ_API_KEY=test_key_not_used_in_tests \
-                        --user app \
-                        --workdir /app/src \
-                        --entrypoint /home/app/.local/bin/pytest \
-                        ${IMAGE_NAME}:${IMAGE_TAG} \
-                        ../tests/ -v --tb=short
                 '''
             }
         }
@@ -97,7 +104,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to K3s') {
             steps {
                 echo 'Deploying to Production Server via Ansible...'
                 withCredentials([sshUserPrivateKey(
@@ -106,16 +113,16 @@ pipeline {
                 )]) {
                     sh '''
                         scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                            ansible/deploy.yml \
+                            -r ansible \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
 
-                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r \
-                            k8s/ \
+                        scp -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                            -r k8s \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP}:/home/ubuntu/
 
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
                             ${PROD_SERVER_USER}@${PROD_SERVER_IP} \
-                            "ansible-playbook /home/ubuntu/deploy.yml \
+                            "ansible-playbook /home/ubuntu/ansible/deploy.yml \
                              -e image_tag=${IMAGE_TAG} \
                              -e docker_hub_user=${DOCKER_HUB_USER}"
                     '''
@@ -154,8 +161,9 @@ pipeline {
             echo 'Pipeline FAILED. Check the stage output above for details.'
         }
         always {
-            sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true"
-            sh "docker rmi ${IMAGE_NAME}:latest || true"
+            sh "docker image rm ${IMAGE_NAME}:${IMAGE_TAG} || true"
+            sh "docker image rm ${IMAGE_NAME}:latest || true"
+            sh "rm -rf venv coverage.xml || true"
         }
     }
 }
