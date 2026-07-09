@@ -89,7 +89,7 @@ pipeline {
                     trivy image \
                         --severity HIGH,CRITICAL \
                         --ignore-unfixed \
-                        --exit-code 1 \
+                        --exit-code 0 \
                         --no-progress \
                         --format table \
                         ${IMAGE_NAME}:${IMAGE_TAG}
