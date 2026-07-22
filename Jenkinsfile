@@ -36,13 +36,17 @@ pipeline {
         }
 
         // ── Stage 3: Unit Tests ───────────────────────────────────────────
-        // Runs 13 pytest tests inside the built image as the app user.
+        // Runs pytest tests inside the built image as the app user.
         // Tests never call the LLM so no real GROQ_API_KEY is needed.
         stage('Unit Tests') {
             steps {
                 echo 'Running pytest inside Docker container...'
                 sh """
-                    docker run --rm \
+                    TEST_CONTAINER="rag-chatbot-test-${BUILD_NUMBER}"
+                    docker rm -f "\${TEST_CONTAINER}" || true
+
+                    docker create \
+                        --name "\${TEST_CONTAINER}" \
                         -e CHROMA_DB_PATH=/tmp/chroma_test \
                         -e DATA_DIR=/app/data \
                         -e GROQ_API_KEY=test_key_not_used_in_tests \
@@ -50,8 +54,20 @@ pipeline {
                         --user app \
                         --workdir /app \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
-                        python -m pytest tests/ -v --tb=short
+                        python -m pytest tests/ -v --tb=short \
+                            --cov=src \
+                            --cov-report=term-missing \
+                            --cov-report=xml:/tmp/coverage.xml
+
+                    docker start -a "\${TEST_CONTAINER}"
+                    docker cp "\${TEST_CONTAINER}":/tmp/coverage.xml coverage.xml
+                    docker rm "\${TEST_CONTAINER}"
                 """
+            }
+            post {
+                always {
+                    sh "docker rm -f rag-chatbot-test-${BUILD_NUMBER} || true"
+                }
             }
         }
 
@@ -71,6 +87,8 @@ pipeline {
                         sonar-scanner \
                             -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                             -Dsonar.sources=src \
+                            -Dsonar.tests=tests \
+                            -Dsonar.python.coverage.reportPaths=coverage.xml \
                             -Dsonar.python.version=3.12 \
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.token=${SONAR_TOKEN}
