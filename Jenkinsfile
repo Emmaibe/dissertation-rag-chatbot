@@ -22,6 +22,8 @@ pipeline {
         }
 
         // ── Stage 2: Docker Build ──────────────────────────────────────────
+        // Multi-stage build: compiler tooling stripped from final image,
+        // reducing attack surface and Trivy-reportable CVEs.
         stage('Docker Build') {
             steps {
                 echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}..."
@@ -53,7 +55,13 @@ pipeline {
             }
         }
 
-        // ── Stage 4: Static Analysis (SonarQube) ──────────────────────────
+        // ── Stage 4: Static Analysis + Quality Gate (SonarQube) ───────────
+        // Analyses src/ for bugs, vulnerabilities, and code smells.
+        // Polls the SonarQube Quality Gate API after scanning — pipeline
+        // FAILS if the gate status is not OK. This is a genuine blocking
+        // gate, not just a reporting step.
+        // For the "without security controls" demonstration: comment out
+        // the Quality Gate polling block below.
         stage('Static Analysis') {
             steps {
                 echo 'Running SonarQube static analysis...'
@@ -67,13 +75,37 @@ pipeline {
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.token=${SONAR_TOKEN}
                     '''
+
+                    // ── Quality Gate check ─────────────────────────────────
+                    // Wait for SonarQube to compute the gate result, then
+                    // poll the API and fail the pipeline if status != OK.
+                    sh '''
+                        echo "Waiting for SonarQube to compute Quality Gate result..."
+                        sleep 15
+
+                        GATE_STATUS=$(curl -sf -u "${SONAR_TOKEN}:" \
+                            "${SONAR_HOST_URL}/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}" \
+                            | python3 -c "import sys,json; print(json.load(sys.stdin)['projectStatus']['status'])")
+
+                        echo "Quality Gate status: ${GATE_STATUS}"
+
+                        if [ "${GATE_STATUS}" != "OK" ]; then
+                            echo "SonarQube Quality Gate FAILED — blocking deployment."
+                            echo "Fix the reported issues and push again."
+                            exit 1
+                        fi
+
+                        echo "SonarQube Quality Gate PASSED — proceeding to security scan."
+                    '''
                 }
             }
         }
 
         // ── Stage 5: Security Scan (Trivy) ────────────────────────────────
-        // Reports CVEs but does not block (exit-code 0) for the baseline run.
-        // Switch to exit-code 1 for the "with security controls" demonstration.
+        // Scans the built image for HIGH and CRITICAL CVEs that have fixes.
+        // --exit-code 1: pipeline FAILS if fixable vulnerabilities are found.
+        // For the "without security controls" demonstration: change to
+        // --exit-code 0 so Trivy reports but does not block.
         stage('Security Scan') {
             steps {
                 echo 'Scanning Docker image with Trivy...'
@@ -81,7 +113,7 @@ pipeline {
                     trivy image \
                         --severity HIGH,CRITICAL \
                         --ignore-unfixed \
-                        --exit-code 0 \
+                        --exit-code 1 \
                         --no-progress \
                         --format table \
                         ${IMAGE_NAME}:${IMAGE_TAG}
@@ -90,6 +122,8 @@ pipeline {
         }
 
         // ── Stage 6: Push Image ───────────────────────────────────────────
+        // Only reached if all previous gates pass.
+        // Image pushed to Docker Hub for K3s to pull on the Prod Server.
         stage('Push Image') {
             steps {
                 echo "Pushing ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub..."

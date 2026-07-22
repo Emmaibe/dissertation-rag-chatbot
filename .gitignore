@@ -34,3 +34,5 @@ files.zip
 
 # Docker local dev only
 docker-compose.yml
+
+evaluation/

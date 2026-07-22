@@ -22,7 +22,8 @@ from collections import defaultdict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from prometheus_fastapi_instrumentator import Instrumentator
 
@@ -32,6 +33,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 from rag_pipeline import RAGPipeline, RAGResponse
 
 logger = logging.getLogger(__name__)
+PROJECT_ROOT = pathlib.Path(__file__).parent.parent
+VITE_UI_DIST_DIR = PROJECT_ROOT / "ui" / "dist"
+VITE_UI_INDEX = VITE_UI_DIST_DIR / "index.html"
+LEGACY_UI_INDEX = PROJECT_ROOT / "index.html"
 
 # Global pipeline instance
 pipeline: Optional[RAGPipeline] = None
@@ -91,6 +96,13 @@ app.add_middleware(
 #   http_request_duration_seconds — latency histogram per endpoint
 #   http_requests_in_progress — concurrent requests gauge
 Instrumentator().instrument(app).expose(app)
+
+if (VITE_UI_DIST_DIR / "assets").exists():
+    app.mount(
+        "/ui/assets",
+        StaticFiles(directory=VITE_UI_DIST_DIR / "assets"),
+        name="ui-assets",
+    )
 
 
 # ── Request / Response Models ──────────────────────────────────────────────────
@@ -168,10 +180,20 @@ def root():
 @app.get("/ui", response_class=HTMLResponse, tags=["UI"])
 def serve_ui():
     """Serve the chat UI at GET /ui."""
-    html_path = pathlib.Path(__file__).parent.parent / "index.html"
+    html_path = VITE_UI_INDEX if VITE_UI_INDEX.exists() else LEGACY_UI_INDEX
     if not html_path.exists():
         raise HTTPException(status_code=404, detail="UI file not found")
+    if html_path == VITE_UI_INDEX:
+        return FileResponse(html_path)
     return HTMLResponse(content=html_path.read_text(encoding="utf-8"))
+
+
+@app.get("/ui/{path:path}", response_class=HTMLResponse, tags=["UI"])
+def serve_ui_spa(path: str):
+    """Return the Vite SPA shell for direct /ui/* navigation."""
+    if not VITE_UI_INDEX.exists():
+        raise HTTPException(status_code=404, detail="UI file not found")
+    return FileResponse(VITE_UI_INDEX)
 
 
 @app.get("/health", tags=["Health"])

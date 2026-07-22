@@ -60,8 +60,9 @@ COPY data/ ./data/
 COPY tests/ ./tests/
 COPY chatbot.py ingest.py ./
 
-# Copy chat UI — served at GET /ui by app.py
+# Copy fallback chat UI and Vite build output - served at GET /ui by app.py
 COPY index.html ./index.html
+COPY ui/ ./ui/
 
 # CHROMA_DB_PATH and DATA_DIR are deliberately excluded here.
 # They are injected by the K8s ConfigMap (rag-chatbot-config) at runtime
