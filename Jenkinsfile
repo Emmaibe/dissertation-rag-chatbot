@@ -62,6 +62,8 @@ pipeline {
                     docker start -a "\${TEST_CONTAINER}"
                     docker cp "\${TEST_CONTAINER}":/tmp/coverage.xml coverage.xml
                     docker rm "\${TEST_CONTAINER}"
+
+                    python3 -c "from pathlib import Path; p=Path('coverage.xml'); p.write_text(p.read_text().replace('<source>/app/src</source>', '<source>src</source>'))"
                 """
             }
             post {
